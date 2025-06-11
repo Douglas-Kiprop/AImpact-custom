@@ -1,0 +1,110 @@
+# AImpact Project: Task List
+
+## Phase 0: Environment Setup & Foundational Backend
+- [x] Setup Python virtual environment for the backend.
+- [x] Initialize FastAPI project.
+- [x] Create basic backend project structure (e.g., `api/`, `core/`, `services/`, `agents/`, `models/`).
+- [x] Configure `python-dotenv` for environment variable management.
+- [x] User to perform initial Supabase project setup.
+- [x] User to perform initial Google Cloud Project setup for Vertex AI/Gemini.
+
+## Phase 1: Backend Core & SEO Keyword n8n Workflow Integration
+- [x] Define Pydantic models for API requests/responses (e.g., chat messages, keyword requests).
+- [x] Create FastAPI endpoint for receiving user chat messages.
+- [x] Implement `ToolRegistryService` to manage n8n webhooks and tool definitions.
+- [x] Implement `N8NTool` (or similar class/functions) for the SEO Keyword Generator n8n workflow.
+  - [x] Define input schema for the SEO keyword n8n workflow.
+  - [x] Define output schema/parser for the SEO keyword n8n workflow.
+  - [x] Implement function to trigger the n8n webhook with user input.
+- [x] Implement `WebhookHandlerService` to receive asynchronous results from n8n workflows.
+- [ ] Implement basic error handling and logging mechanisms.
+
+## Phase 2: Basic Frontend Chat UI (React)
+- [ ] Setup React project (e.g., using Vite or Create React App).
+- [ ] Install and configure Tailwind CSS.
+- [ ] Create a basic chat interface component.
+  - [ ] Input field for user messages.
+  - [ ] Display area for chat history (user and AI messages).
+- [ ] Implement a frontend service to send messages to the FastAPI backend.
+- [ ] Implement logic to receive and display responses from the backend in the chat UI.
+
+## Phase 3: Google ADK/Vertex AI Agent Integration (for SEO)
+- [x] Install Google ADK (`google-cloud-aiplatform` and related libraries).
+- [x] Design the initial AI Orchestrator Agent using Google ADK.
+  - [ ] Define the agent's role, persona, and initial instructions (system prompt).
+  - [ ] Integrate the `N8NTool` for SEO keyword generation as a callable tool for the agent.
+- [x] Modify the FastAPI chat endpoint to pass user messages to the AI Orchestrator.
+- [ ] Ensure the agent can:
+  - [ ] Understand user intent related to SEO keyword generation.
+  - [ ] Gather necessary inputs from the user if not provided (e.g., topic, target audience).
+  - [ ] Call the SEO keyword n8n tool via the `ToolRegistryService`.
+  - [ ] Formulate a coherent response based on the n8n tool's output.
+
+## Phase 4: Enhancing Agent Dialogue & Error Handling
+- [ ] Improve the AI Orchestrator's conversational abilities (e.g., handling clarifications, follow-up questions, maintaining context).
+- [ ] Implement more robust error handling within the agent and backend services.
+  - [ ] Gracefully handle n8n workflow failures or timeouts.
+  - [ ] Handle API errors from external services (Google AI, n8n).
+  - [ ] Provide user-friendly error messages through the chat interface.
+- [ ] Implement `ChatSessionService` for managing conversation history and context (initially in-memory or simple storage, later Supabase).
+
+## Phase 5: Initial Supabase Integration
+- [ ] Define Supabase database schema for storing chat history (e.g., user ID, session ID, messages, timestamps).
+- [ ] Implement a `SupabaseService` (or data access layer) for database interactions (CRUD operations).
+- [ ] Integrate with `ChatSessionService` or directly in the AI Orchestrator flow to save chat messages and AI responses to Supabase.
+
+## Phase 6: Adding Second n8n Workflow (e.g., Google Trends Extractor)
+- [ ] Register the Google Trends n8n workflow in the `ToolRegistryService`.
+- [ ] Implement a new `N8NTool` for the Google Trends extractor.
+  - [ ] Define its input and output schemas.
+- [ ] Extend the AI Orchestrator Agent to recognize intent for Google Trends analysis and use the new tool.
+  - [ ] Update the agent's instructions and available toolset.
+- [ ] Update frontend if necessary to specifically showcase or trigger this new capability (or rely on natural language understanding).
+
+## Phase 7: Authentication & Authorization (Supabase Auth)
+- [ ] Configure Supabase Authentication (e.g., email/password, social logins).
+- [ ] Implement user registration and login flows in the React frontend.
+- [ ] Implement token-based authentication (e.g., JWT) in the FastAPI backend.
+  - [ ] Middleware to protect relevant endpoints.
+- [ ] Secure backend endpoints, allowing access only to authenticated users.
+- [ ] Associate user data (e.g., chat history, API usage) with authenticated user IDs in Supabase.
+
+## Phase 8: Remaining n8n Workflows & Feature Expansion
+- [ ] Iteratively integrate remaining n8n workflows (e.g., AI Product Images, Marketing Strategy Outline Generator).
+  - [ ] For each workflow:
+    - [ ] Register in `ToolRegistryService`.
+    - [ ] Implement `N8NTool` definition.
+    - [ ] Update AI Orchestrator to understand intent and use the tool.
+    - [ ] Update frontend if specific UI elements are needed.
+- [ ] Develop corresponding UI elements or interactions for new features as they are added.
+
+## Phase 9: Usage & Billing Service (Foundation for Pay-Per-Job)
+- [ ] Design Supabase schema for tracking API/tool usage (e.g., user ID, tool ID, timestamp, units consumed).
+- [ ] Implement a `UsageBillingService` in the backend to log usage.
+  - [ ] Method to record an instance of tool usage.
+- [ ] Integrate with the AI Orchestrator or `ToolRegistryService` to call the `UsageBillingService` after successful tool execution.
+- (Note: Full pay-per-job mechanism with payment integration is a future extension; this phase lays the essential groundwork for tracking.)
+
+## Phase 10: Comprehensive Testing & Refinement
+- [ ] Write unit tests for backend services, agent logic, and critical utility functions.
+- [ ] Write integration tests for API endpoints and interactions between services (e.g., Agent -> ToolRegistry -> n8n).
+- [ ] Conduct end-to-end testing of user flows from frontend to backend and back.
+- [ ] Perform UI/UX testing and gather feedback for refinement.
+- [ ] Conduct basic performance testing and identify potential bottlenecks.
+- [ ] Perform a security review of authentication, authorization, and data handling.
+
+## Phase 11: Documentation & Deployment Preparation
+- [ ] Create API documentation (e.g., using FastAPI's automatic docs, or tools like Swagger/OpenAPI).
+- [ ] Write brief user documentation or a guide on how to use the AImpact agent's capabilities.
+- [ ] Prepare for deployment:
+  - [ ] Dockerize the FastAPI backend.
+  - [ ] Dockerize the React frontend (or prepare for static hosting).
+  - [ ] Plan CI/CD pipeline (e.g., using GitHub Actions).
+
+## Future Considerations (Post-MVP)
+- [ ] Advanced AI Agent capabilities (memory, learning).
+- [ ] Full pay-per-job/subscription model with payment gateway integration.
+- [ ] Admin dashboard for user management and analytics.
+- [ ] More sophisticated n8n workflow management.
+- [ ] Support for user-uploaded documents or data sources.
+- [ ] Multi-language support.

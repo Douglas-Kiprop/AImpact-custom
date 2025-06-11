@@ -1,0 +1,8 @@
+
+Sending request: {'session_id': '64113df7-20ff-48db-9954-737adfbf5ddd', 'message': "Generate SEO keywords for 'sustainable fashion'"}
+Response Status: 200
+Response Body: {"response":"I need more information to generate effective SEO keywords. Please provide details about:\n\n*   **Product:** What is the specific product related to sustainable fashion? (e.g., organic cotton t-shirts, recycled denim jeans, etc.)\n*   **Pain points:** What problems does your product solve for the customer? (e.g., lack of ethical options, concern for the environment, etc.)\n*   **Goals:** What are the customer's goals or objectives? (e.g., find eco-friendly clothing, reduce their carbon footprint, etc.)\n*   **Current solutions:** How do customers currently address their needs? (e.g., shopping at fast-fashion brands, thrifting, etc.)\n*   **Expertise level:** What is the customer's level of knowledge about sustainable fashion? (e.g., beginner, intermediate, expert)"}
+
+Sending request: {'session_id': '64113df7-20ff-48db-9954-737adfbf5ddd', 'message': 'Hello, how are you today?'}
+Response Status: 200
+Response Body: {"response":"I am doing well. How can I help you today?\n"}

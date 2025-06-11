@@ -1,0 +1,51 @@
+AImpact/ (Root Project Folder)
+├── backend/ (Python FastAPI Backend)
+│   ├── app/ 
+│   │   ├── api/ (External-facing API routers and schemas)
+│   │   │   ├── v1/
+│   │   │   │   ├── chat_router.py      # Handles /chat/invoke, etc.
+│   │   │   │   ├── webhook_router.py   # Handles /webhook/n8n/*
+│   │   │   │   └── auth_router.py      # Handles /auth/*
+│   │   │   ├── schemas/ (Pydantic schemas for API I/O)
+│   │   │   │   ├── chat_schemas.py
+│   │   │   │   ├── webhook_schemas.py
+│   │   │   │   └── auth_schemas.py
+│   │   │   └── __init__.py
+│   │   ├── agents/ (ADK Agent definitions and core logic)
+│   │   │   ├── orchestrator_agent.py # Main AI agent using ADK
+│   │   │   ├── tools/                # ADK tool definitions
+│   │   │   │   ├── n8n_tools/        # Tools that wrap n8n workflows
+│   │   │   │   │   ├── seo_keyword_tool.py
+│   │   │   │   │   └── ...
+│   │   │   │   ├── internal_tools/   # Tools that are Python functions
+│   │   │   │   │   └── marketing_strategist_tool.py
+│   │   │   │   └── __init__.py
+│   │   │   └── __init__.py
+│   │   ├── core/ (Core application settings, configurations, DB connection)
+│   │   │   ├── config.py           # Settings, env vars
+│   │   │   ├── database.py         # Supabase client setup
+│   │   │   └── __init__.py
+│   │   ├── services/ (Internal business logic and integrations)
+│   │   │   ├── auth_service.py       # User authentication logic
+│   │   │   ├── chat_session_service.py # Manages conversation state
+│   │   │   ├── n8n_invoker_service.py  # Calls n8n webhooks
+│   │   │   ├── tool_registry_service.py # Manages available tools
+│   │   │   ├── usage_service.py      # For future billing/usage tracking
+│   │   │   └── __init__.py
+│   │   ├── models/ (Database models - e.g., SQLModel or Pydantic for Supabase)
+│   │   │   ├── user_model.py
+│   │   │   ├── conversation_model.py
+│   │   │   └── __init__.py
+│   │   ├── main.py (FastAPI application instance and startup)
+│   │   └── __init__.py
+│   ├── tests/
+│   ├── .env
+│   ├── .gitignore
+│   ├── requirements.txt
+│   └── README.md
+│
+├── frontend/ (React - structure as previously discussed, seems fine)
+│   └── ... 
+│
+├── .gitignore
+└── README.md
