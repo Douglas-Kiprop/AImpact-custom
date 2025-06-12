@@ -28,7 +28,7 @@ function ChatInterface() {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [taskDescriptions]); // Fixed ESLint warning by adding taskDescriptions to dependency array
 
   const handleSendMessage = async () => {
     if (input.trim()) {
@@ -55,45 +55,6 @@ function ChatInterface() {
       handleSendMessage();
     }, 100);
   };
-
-  const suggestions = [
-    {
-      id: 'seo',
-      label: 'Generate SEO Keywords',
-      icon: '🔍',
-      prompt: 'Help me generate SEO keywords for my content',
-      gradient: 'from-blue-500/20 to-cyan-500/20',
-      border: 'border-blue-500/30',
-      hover: 'hover:border-blue-400/50'
-    },
-    {
-      id: 'trends',
-      label: 'Google Trends Scraping',
-      icon: '📈',
-      prompt: 'Analyze Google Trends data for market insights',
-      gradient: 'from-green-500/20 to-emerald-500/20',
-      border: 'border-green-500/30',
-      hover: 'hover:border-green-400/50'
-    },
-    {
-      id: 'email',
-      label: 'Cold Email',
-      icon: '✉️',
-      prompt: 'Create a cold email campaign strategy',
-      gradient: 'from-purple-500/20 to-pink-500/20',
-      border: 'border-purple-500/30',
-      hover: 'hover:border-purple-400/50'
-    },
-    {
-      id: 'chat',
-      label: 'AI Chat',
-      icon: '💬',
-      prompt: 'Let\'s have a conversation about your business needs',
-      gradient: 'from-orange-500/20 to-red-500/20',
-      border: 'border-orange-500/30',
-      hover: 'hover:border-orange-400/50'
-    }
-  ];
 
   if (messages.length > 0) {
     // Full chat interface when messages exist
@@ -222,25 +183,32 @@ function ChatInterface() {
           </p>
         </div>
 
-        {/* Suggestion Buttons */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-12 max-w-6xl w-full">
-          {suggestions.map((suggestion) => (
-            <button
-              key={suggestion.id}
-              onClick={() => handleWorkflowButton(suggestion.id, suggestion.prompt)}
-              className={`group relative p-6 rounded-2xl backdrop-blur-xl bg-gradient-to-br ${suggestion.gradient} border ${suggestion.border} ${suggestion.hover} transition-all duration-300 hover:scale-105 hover:shadow-2xl`}
-            >
-              <div className="text-center">
-                <div className="text-3xl mb-3 group-hover:scale-110 transition-transform duration-200">
-                  {suggestion.icon}
-                </div>
-                <h3 className="text-white font-semibold text-sm mb-2">
-                  {suggestion.label}
-                </h3>
-                <div className="w-8 h-0.5 bg-gradient-to-r from-transparent via-white/30 to-transparent mx-auto group-hover:via-white/60 transition-all duration-200"></div>
-              </div>
-            </button>
-          ))}
+        {/* Simple Rounded Glass Suggestion Pills */}
+        <div className="flex flex-wrap justify-center gap-3 mb-12 max-w-4xl">
+          <button
+            onClick={() => handleWorkflowButton('seo', 'Help me generate SEO keywords for my content')}
+            className="px-6 py-3 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full text-white text-sm font-medium hover:bg-white/20 hover:border-white/30 transition-all duration-200 hover:scale-105"
+          >
+            Generate SEO Keywords
+          </button>
+          <button
+            onClick={() => handleWorkflowButton('trends', 'Analyze Google Trends data for market insights')}
+            className="px-6 py-3 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full text-white text-sm font-medium hover:bg-white/20 hover:border-white/30 transition-all duration-200 hover:scale-105"
+          >
+            Google Trends Scraping
+          </button>
+          <button
+            onClick={() => handleWorkflowButton('email', 'Create a cold email campaign strategy')}
+            className="px-6 py-3 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full text-white text-sm font-medium hover:bg-white/20 hover:border-white/30 transition-all duration-200 hover:scale-105"
+          >
+            Cold Email
+          </button>
+          <button
+            onClick={() => handleWorkflowButton('chat', 'Let\'s have a conversation about your business needs')}
+            className="px-6 py-3 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full text-white text-sm font-medium hover:bg-white/20 hover:border-white/30 transition-all duration-200 hover:scale-105"
+          >
+            AI Chat
+          </button>
         </div>
 
         {/* Main Chat Input */}
