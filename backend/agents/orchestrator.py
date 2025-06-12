@@ -1,23 +1,25 @@
+import os
 import json
-import uuid # Added this line
+import uuid
 from backend.services.tool_registry_service import ToolRegistryService
 from backend.tools.n8n_tool_handler import N8NToolHandler
 from backend.api.schemas import SEOKeywordRequest, SEOKeywordResponse
 from google.cloud import aiplatform
 from vertexai.preview.generative_models import GenerativeModel, Part, Tool as VertexTool, FunctionDeclaration
-from backend.models.tool_definition import N8NToolDefinition # Added this import
+from backend.models.tool_definition import N8NToolDefinition
 
 class AIOrchestratorAgent:
     def __init__(self, tool_registry: ToolRegistryService):
         self.tool_registry = tool_registry
-        # self.n8n_tool_handler is no longer needed here, it will be instantiated when a tool is called
         
-        # Initialize Vertex AI
-        # You might want to move project_id and location to environment variables
-        aiplatform.init(project="aimpact-462308", location="us-central1") # IMPORTANT: Replace with your GCP Project ID and desired location
+        # Initialize Vertex AI with environment variables
+        aiplatform.init(
+            project=os.getenv("GCP_PROJECT_ID"),
+            location=os.getenv("GCP_LOCATION")
+        )
         
-        self.model_tools = [] # Initialize model_tools here
-        self.model = GenerativeModel("gemini-2.0-flash-lite-001", tools=self.model_tools) # Or "gemini-pro-vision" if you need image capabilities
+        self.model_tools = []
+        self.model = GenerativeModel("gemini-2.0-flash-lite-001", tools=self.model_tools)
         
         self.system_prompt = """
         You are an AI assistant specialized in marketing and business intelligence. Your goal is to assist users by orchestrating various tools to fulfill their requests.
@@ -50,8 +52,8 @@ class AIOrchestratorAgent:
             id="seo_keyword_generator",
             name="SEO Keyword Generator",
             description="Generates SEO keywords for a given topic and optional target audience.",
-            webhook_url="https://dwayneg.app.n8n.cloud/webhook-test/775da11e-8a60-4a7d-a652-4ee39647122d", # You might want to get this from a config or environment variable
-            input_schema=[] # This should be populated with ToolParameter objects if you want to validate input
+            webhook_url=os.getenv("N8N_WEBHOOK_URL"),
+            input_schema=[]
         )
 
         # Register the tool with our internal ToolRegistryService
@@ -90,7 +92,7 @@ class AIOrchestratorAgent:
                 
                 # Send the tool result back to the model to get a natural language response
                 tool_response_part = Part.from_function_response(name=tool_name, response=tool_result)
-                final_response = await chat.send_message(tool_response_part)
+                final_response = chat.send_message(tool_response_part) # REMOVED 'await' HERE
                 
                 return final_response.text
             except Exception as e:

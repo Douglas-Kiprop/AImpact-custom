@@ -1,5 +1,6 @@
+import os
 from typing import Dict, Optional, List
-from backend.models.tool_definition import N8NToolDefinition, ToolParameter # Assuming you create the file above
+from backend.models.tool_definition import N8NToolDefinition, ToolParameter
 
 class ToolRegistryService:
     def __init__(self):
@@ -12,11 +13,11 @@ class ToolRegistryService:
             id="seo_keyword_generator",
             name="SEO Keyword Generator",
             description="Generates SEO keywords based on product details, pain points, goals, current solutions, and customer expertise level.",
-            webhook_url="https://dwayneg.app.n8n.cloud/webhook-test/775da11e-8a60-4a7d-a652-4ee39647122d",
+            webhook_url=os.getenv("N8N_WEBHOOK_URL"), # Corrected to use environment variable
             input_schema=[
                 ToolParameter(name="product", description="Details of the intended product.", type="string"),
-                ToolParameter(name="pain_points", description="List of customer pain points.", type="string"), # Or potentially List[str]
-                ToolParameter(name="goals", description="List of customer key goals/objectives.", type="string"), # Or potentially List[str]
+                ToolParameter(name="pain_points", description="List of customer pain points.", type="string"),
+                ToolParameter(name="goals", description="List of customer key goals/objectives.", type="string"),
                 ToolParameter(name="current_solutions", description="How the ideal customer currently solves their pain points.", type="string"),
                 ToolParameter(name="expertise_level", description="Customer's level of expertise.", type="string"),
             ]
@@ -46,3 +47,12 @@ class ToolRegistryService:
 # seo_tool = tool_registry.get_tool("seo_keyword_generator")
 # if seo_tool:
 #     print(f"Found tool: {seo_tool.name}, Webhook: {seo_tool.webhook_url}")
+
+    def register_n8n_tool(self, tool_definition: N8NToolDefinition):
+        tool_info = {
+            "id": tool_definition.id,
+            "name": tool_definition.name,
+            "description": tool_definition.description,
+            "webhook_url": os.getenv("N8N_WEBHOOK_URL"),
+            "input_schema": tool_definition.input_schema
+        }

@@ -1,8 +1,7 @@
 
-Sending request: {'session_id': '64113df7-20ff-48db-9954-737adfbf5ddd', 'message': "Generate SEO keywords for 'sustainable fashion'"}
-Response Status: 200
-Response Body: {"response":"I need more information to generate effective SEO keywords. Please provide details about:\n\n*   **Product:** What is the specific product related to sustainable fashion? (e.g., organic cotton t-shirts, recycled denim jeans, etc.)\n*   **Pain points:** What problems does your product solve for the customer? (e.g., lack of ethical options, concern for the environment, etc.)\n*   **Goals:** What are the customer's goals or objectives? (e.g., find eco-friendly clothing, reduce their carbon footprint, etc.)\n*   **Current solutions:** How do customers currently address their needs? (e.g., shopping at fast-fashion brands, thrifting, etc.)\n*   **Expertise level:** What is the customer's level of knowledge about sustainable fashion? (e.g., beginner, intermediate, expert)"}
+--- Turn 1: Initial Tool Call Request ---
+Turn 1 Response: {'response': "I can certainly help with that! To generate the most relevant SEO keywords, I need a bit more information. Could you please provide the following details:\n\n*   **Product:** What is the blog post about? (e.g., tips for reducing waste, eco-friendly product reviews, etc.)\n*   **Pain points:** What problems does sustainable living solve for the reader? (e.g., high energy bills, environmental concerns, etc.)\n*   **Goals:** What are the reader's goals related to sustainable living? (e.g., reduce their carbon footprint, save money, live a healthier lifestyle, etc.)\n*   **Current solutions:** How do people currently try to live sustainably? (e.g., recycling, using reusable bags, etc.)\n*   **Expertise level:** What is the reader's level of expertise? (e.g., beginner, intermediate, expert)\n\n", 'session_id': '5b0fa4c9-da3c-41af-99c4-68c3361038c1'}
+Captured Session ID: 5b0fa4c9-da3c-41af-99c4-68c3361038c1
 
-Sending request: {'session_id': '64113df7-20ff-48db-9954-737adfbf5ddd', 'message': 'Hello, how are you today?'}
-Response Status: 200
-Response Body: {"response":"I am doing well. How can I help you today?\n"}
+--- Turn 2: Providing Follow-up Answers ---
+Turn 2 Response: {'response': 'I have started the process of generating SEO keywords. I will let you know when the keywords are ready.\n', 'session_id': '5b0fa4c9-da3c-41af-99c4-68c3361038c1'}

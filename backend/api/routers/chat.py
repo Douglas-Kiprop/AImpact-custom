@@ -33,4 +33,4 @@ async def message_endpoint(chat_request: ChatRequest,
         chat_request.message, 
         session_id
     )
-    return {"response": response_message}
+    return {"response": response_message, "session_id": str(session_id)}
