@@ -36,7 +36,7 @@ function ChatInterface() {
       setMessages(prev => [...prev, userMessage]);
       setInput('');
       
-      // TODO: Integrate with backend API
+      // TODO: Integrate with backend API and agent
       // const response = await fetch('/api/v1/message', {
       //   method: 'POST',
       //   headers: { 'Content-Type': 'application/json' },
