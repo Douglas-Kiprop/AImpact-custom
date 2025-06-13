@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 import os
 
@@ -13,6 +14,18 @@ app = FastAPI(
     title="AImpact API",
     description="API for AImpact, integrating FastAPI with n8n and AI services.",
     version="0.1.0",
+)
+
+origins = [
+    "http://localhost:3000",  # Allow your frontend to access the backend
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # Include the chat router
